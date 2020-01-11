@@ -43,6 +43,11 @@ Component({
         let decimal = cStr.substring(cStr.length - 8, cStr.length - 8 + pointLen)
         return `${integer}.${decimal}亿`
       }
+    },
+    toPlaylistDetail () {
+      wx.navigateTo({
+        url: `/pages/musiclist/musiclist?playlistId=${this.properties.playlist.id}`,
+      })
     }
   }
 })
