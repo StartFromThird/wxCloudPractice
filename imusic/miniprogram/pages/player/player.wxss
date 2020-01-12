@@ -1,0 +1,66 @@
+.player-bg-mask,
+.player-bg-img {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+}
+.player-bg-mask {
+  background-color: #333;
+  z-index: -2;
+}
+.player-bg-img {
+  filter: blur(40rpx);
+  opacity: 0.4;
+  z-index: -1;
+}
+.player-disc {
+  width: 592rpx;
+  height: 592rpx;
+  background: url('https://s3.music.126.net/mobile-new/img/disc.png?d3bdd1080a72129346aa0b4b4964b75f=') no-repeat center/contain;
+  /* position: absolute; */
+  margin: 140rpx auto 0;
+  position: relative;
+  /* left: 50%; */
+  /* transform: translateY(140rpx); */
+}
+.player-disc::after {
+  content: '';
+  width: 192rpx;
+  height: 274rpx;
+  position: absolute;
+  top: -150rpx;
+  left: 266rpx;
+  background: url('https://s3.music.126.net/m/s/img/needle.png?702cf6d95f29e2e594f53a3caab50e12') no-repeat center/contain;
+  transform: rotate(-15deg);
+  transform-origin: 24rpx 10rpx;
+  transition: transform 0.5s ease;
+}
+.player-disc-cover {
+  width: 368rpx;
+  height: 368rpx;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -184rpx;
+  margin-left: -184rpx;
+  border-radius: 50%;
+}
+.player-progress {
+  height: 40px;
+  outline: 1px solid #f00;
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  width: 80%;
+}
+.player-control {
+  height: 40px;
+  outline: 1px solid #f00;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  width: 80%;
+}

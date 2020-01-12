@@ -1,0 +1,16 @@
+<page>
+<view class="player-bg-mask"></view>
+<view class="player-bg-img" style="background: url({{bgImgUrl}}) center/cover no-repeat"></view>
+<view class="player-main">
+  <view class="player-disc">
+    <image class="player-disc-cover rotation" src="{{bgImgUrl}}"></image>
+  </view>
+</view>
+<view class="player-progress">进度条</view>
+<view class="player-control">
+  <view class="prev">上</view>
+  <view class="toggle-play">停</view>
+  <view class="next">下</view>
+</view>
+
+</page>

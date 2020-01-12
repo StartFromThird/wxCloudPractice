@@ -20,8 +20,12 @@ Component({
   methods: {
     musiclistSelect (e) {
       let id = e.currentTarget.dataset.activeid
+      let index = e.currentTarget.dataset.activeindex
       this.setData({
         activeId: id
+      })
+      wx.navigateTo({
+        url: `/pages/player/player?musicId=${id}&index=${index}`,
       })
     }
   }
