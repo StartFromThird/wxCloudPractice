@@ -24,5 +24,11 @@ exports.main = async (event, context) => {
         return JSON.parse(res)
       })
   })
+  app.router('musicSource', async (ctx, next) => {
+    ctx.body = await rp(BASE_URL + '/song/url?id=' + event.id)
+      .then((res) => {
+        return JSON.parse(res)
+      })
+  })
   return app.serve()
 }
