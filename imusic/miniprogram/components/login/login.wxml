@@ -1,0 +1,10 @@
+<x-bottom-modal isModalHidden="{{isModalHidden}}">
+  <view slot="modal-content">
+    <button
+      class="getUserInfoBtn"
+      open-type="getUserInfo" 
+      bindgetuserinfo="bindGetUserInfo">
+      授权登录
+    </button>
+  </view>
+</x-bottom-modal>

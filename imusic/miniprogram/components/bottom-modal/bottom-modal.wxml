@@ -1,0 +1,6 @@
+<view class="modal" hidden="{{isModalHidden}}">
+  <view class="pannel">
+    <i class="iconfont iconclose" bind:tap="closeModal"></i>
+    <slot name="modal-content"></slot>
+  </view>
+</view>

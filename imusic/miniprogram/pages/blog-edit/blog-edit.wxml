@@ -1,0 +1,11 @@
+<page class="blog-edit-page">
+  <view class="blog-edit-area">
+    <textarea class="blog-words" placeholder="分享新鲜事" maxlength="140" auto-focus
+      bindfocus="onFocus" bindinput="onInput" bindblur="onBlur">
+    </textarea>
+    <text class="blog-words-num">{{blogWordsTip}}</text>
+  </view>
+  <view class="blog-footer" style="bottom:{{footerBottom}}px">
+    <button class="blog-public-btn" bind:tap="send">发布</button>
+  </view>
+</page>

@@ -1,2 +1,15 @@
-<!--pages/blog/blog.wxml-->
-<text>pages/blog/blog.wxml</text>
+<page>
+  <view class="blog-header">
+    <view class="blog-new-btn" bind:tap="newBlog">
+      <view class="iconfont iconNewTab"></view>
+    </view>
+    <view class="blog-search">
+      <x-search iconfont="iconfont" iconsearch="iconsearch"></x-search>
+    </view>
+  </view>
+  <view>
+    <x-login isModalHidden="{{isModalHidden}}"
+     bind:loginsuccess="loginsuccess"
+     bind:loginfail="loginfail"></x-login>
+  </view>
+</page>
