@@ -5,6 +5,22 @@
     </textarea>
     <text class="blog-words-num">{{blogWordsTip}}</text>
   </view>
+  <view class="blog-image-list">
+    <block wx:for="{{images}}" wx:key="*this">
+      <view class="image-wrap">
+        <image src="{{item}}" 
+          mode="aspectFill" 
+          bind:tap="onPreviewImage" 
+          data-img="{{item}}"></image>
+        <i class="iconfont iconclose" bind:tap="onDelImage" data-index="{{index}}"></i>
+      </view>
+    </block>
+    <view class="blog-image-choose image-wrap" 
+      bind:tap="onChooseImage"
+      hidden="{{images.length >= maxImagesNum}}">
+      <i class="iconfont iconadd"></i>
+    </view>
+  </view>
   <view class="blog-footer" style="bottom:{{footerBottom}}px">
     <button class="blog-public-btn" bind:tap="send">发布</button>
   </view>
