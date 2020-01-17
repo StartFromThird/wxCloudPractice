@@ -7,6 +7,14 @@
       <x-search iconfont="iconfont" iconsearch="iconsearch"></x-search>
     </view>
   </view>
+  <view class="blog-list">
+    <block wx:for="{{blogList}}" wx:key="_id">
+      <view class="blog-panel">
+        <x-blog-card blog="{{item}}" data-blogid="{{item._id}}"/>
+      </view>
+    </block>
+    <view class="blog-no-more-tip" hidden="{{isTipHidden}}">暂无更多数据</view>
+  </view>
   <view>
     <x-login isModalHidden="{{isModalHidden}}"
      bind:loginsuccess="loginsuccess"

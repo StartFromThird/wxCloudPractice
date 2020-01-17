@@ -18,3 +18,15 @@
 .blog-search {
   flex: 1;
 }
+.blog-list {
+  margin-top: 120rpx;
+}
+.blog-panel {
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+}
+.blog-no-more-tip {
+  padding: 8rpx 0 20rpx 0;
+  text-align: center;
+  color: #939393;
+}

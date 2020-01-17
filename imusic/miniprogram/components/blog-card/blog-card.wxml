@@ -1,0 +1,14 @@
+<view class="blog-card-item">
+  <view class="blog-title">
+    <image class="blog-portrait" src="{{blog.userInfo.avatarUrl}}"></image>
+    <view class="blog-box">
+      <view class="blog-nickName">{{blog.userInfo.nickName}}</view>
+    </view>
+  </view>
+  <view class="blog-content">{{blog.content}}</view>
+  <view class="blog-img">
+    <block wx:for="{{blog.img}}" wx:key="*this">
+      <image class="img" src="{{item}}" mode="aspectFill" catch:tap="onPreviewImage" data-imgsrc="{{item}}"></image>
+    </block>
+  </view>
+</view>

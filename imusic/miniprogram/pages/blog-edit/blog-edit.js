@@ -51,7 +51,7 @@ Page({
     Promise.all(imgsPromiseArr)
       .then(res => {
         let db = wx.cloud.database()
-        // console.log("多图片上传完", res)
+        console.log("多图片上传完", res)
         db.collection('blog').add({
           data: {
             userInfo,
@@ -67,6 +67,7 @@ Page({
               icon: 'none'
             })
             wx.navigateBack()
+            this.prevPageReload()
           } else {
             wx.showToast({
               title: '发布失败',
@@ -74,6 +75,11 @@ Page({
           }
         })
       })
+  },
+  prevPageReload() {
+    const pages = getCurrentPages()
+    const prevPage = pages[pages.length - 2]
+    prevPage.onPullDownRefresh()
   },
   // 点击图片预览
   onPreviewImage(e) {
