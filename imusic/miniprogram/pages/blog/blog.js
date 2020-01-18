@@ -1,4 +1,5 @@
 // pages/blog/blog.js
+let searchK = ''
 Page({
 
   /**
@@ -17,8 +18,9 @@ Page({
       name: 'blog',
       data: {
         $url: 'list',
+        keyword: searchK, 
         start,
-        count: 3,
+        count: 10,
       }
     }).then((res) => {
       wx.hideLoading()
@@ -34,9 +36,15 @@ Page({
           })
         }
         wx.stopPullDownRefresh()
-        
       }
     })
+  },
+  onSearchList(e) {
+    this.setData({
+      blogList: []
+    })
+    searchK = e.detail.keyword
+    this.getBlogList(0)
   },
   loginsuccess(d) {
     // console.log("授权数据", d)
