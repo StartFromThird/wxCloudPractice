@@ -10,9 +10,10 @@
   background: #fff;
 }
 .blog-new-btn {
+  margin-right: 14rpx;
 }
 .blog-new-btn .iconNewTab {
-  font-size: 80rpx;
+  font-size: 60rpx;
   color: #d43c33;
 }
 .blog-search {

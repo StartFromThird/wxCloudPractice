@@ -1,0 +1,23 @@
+<view class="blog-ctrl-container">
+  <view class="ctrl-item" bind:tap="onComment">
+    <i class="iconfont iconcomment icon"></i>
+    <text>评论</text>
+  </view>
+  <view class="ctrl-item share">
+    <i class="iconfont iconshare icon"></i>
+    <text>分享</text>
+  </view>
+</view>
+<!-- 请求授权弹框 -->
+<x-login
+  isModalHidden="{{isLoginModalHidden}}"
+  bind:loginsuccess="loginsuccess"
+  bind:loginfail="loginfail">
+</x-login>
+<!-- 评论弹框 -->
+<x-bottom-modal isModalHidden="{{isComModalHidden}}">
+  <form slot="modal-content" report-submit="true" bind:submit="onSend">
+    <textarea name="content" class="comment-content" placeholder="写评论" value="{{comment}}" fixed="true"></textarea>
+    <button class="send-btn" size="mini" form-type="submit">发送</button>
+  </form>
+</x-bottom-modal>
