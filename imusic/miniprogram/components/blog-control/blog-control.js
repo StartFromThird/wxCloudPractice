@@ -5,7 +5,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    blog: Object
   },
   externalClasses: [
     'iconfont',
@@ -18,9 +18,16 @@ Component({
   data: {
     isLoginModalHidden: true,
     isComModalHidden: true,
-    comment: ''
+    comment: '',
+    blogId: ''
   },
-
+  lifetimes: {
+    ready() {
+      this.setData({
+        'blogId': this.properties.blog._id
+      })
+    }
+  },
   /**
    * 组件的方法列表
    */
@@ -45,6 +52,7 @@ Component({
         data: {
           content,
           createTime: db.serverDate(),
+          blogId: this.data.blogId,
           nickName: userInfo.nickName,
           avatarUrl: userInfo.avatarUrl
         }
