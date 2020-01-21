@@ -51,7 +51,6 @@ Page({
     Promise.all(imgsPromiseArr)
       .then(res => {
         let db = wx.cloud.database()
-        console.log("多图片上传完", res)
         db.collection('blog').add({
           data: {
             userInfo,

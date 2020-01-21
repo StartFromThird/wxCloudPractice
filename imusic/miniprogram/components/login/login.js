@@ -20,13 +20,11 @@ Component({
   methods: {
     bindGetUserInfo(e) {
       let approve = e.detail.userInfo
-      console.log("授权弹框选择", e)
       if (approve) {
         this.setData({
           isModalHidden: true
         })
-        console.log("确定")
-        this.triggerEvent('loginsuccess', approve.detail)
+        this.triggerEvent('loginsuccess', e.detail.userInfo)
       } else {
         this.triggerEvent('loginfail')
         console.log("不要")

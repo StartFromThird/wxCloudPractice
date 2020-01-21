@@ -10,6 +10,13 @@ Page({
     blogList: [],
     isTipHidden: true
   },
+  goComment(e) {
+    let id = e.target.dataset.blogid
+    wx.navigateTo({
+      url: '/pages/blog-comment/blog-comment?id=' + id,
+    })
+
+  },
   getBlogList(start = 0) {
     wx.showLoading({
       title: '加载中',
@@ -47,9 +54,9 @@ Page({
     this.getBlogList(0)
   },
   loginsuccess(d) {
-    // console.log("授权数据", d)
+    // 外部传来 要d.detail
     wx.navigateTo({
-      url: `/pages/blog-edit/blog-edit?nickName=${d.nickName}&avatarUrl=${d.avatarUrl}`
+      url: `/pages/blog-edit/blog-edit?nickName=${d.detail.nickName}&avatarUrl=${d.detail.avatarUrl}`
     })
   },
   loginfail(e) {
@@ -65,12 +72,15 @@ Page({
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: (res) => {
-              console.log("已给信息", res)
-              let d = JSON.parse(res.rawData)
-              let o = {
-                'nickName': d.nickName,
-                'avatarUrl': d.avatarUrl
-              }
+              // let d = JSON.parse(res.rawData)
+              // let o = {
+              //   'nickName': d.nickName,
+              //   'avatarUrl': d.avatarUrl
+              // }
+              // this.loginsuccess(o)
+              // 为了和 其他组件传过来的参数格式保持一致
+              let o = {}
+              o.detail = res.userInfo
               this.loginsuccess(o)
             }
           })
@@ -139,7 +149,19 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(e) {
+    let t = '发现'
+    let p = '/pages/blog/blog'
+    if (e.target && e.target.dataset && e.target.dataset.blog) {
+      let blogObj = e.target.dataset.blog
+      t = blogObj.content
+      p = `/pages/blog-comment/blog-comment?id=${blogObj._id}`
+    } 
+    return {
+      // 卡片标题
+      title: t,
+      // 卡片点击进入路径
+      path: p,
+    }
   }
 })

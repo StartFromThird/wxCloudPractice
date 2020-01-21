@@ -4,8 +4,10 @@
     <text>评论</text>
   </view>
   <view class="ctrl-item share">
-    <i class="iconfont iconshare icon"></i>
-    <text>分享</text>
+    <button open-type="share" data-blog="{{blog}}" class="share-btn" size="mini" hover-class="share-hover">
+      <i class="iconfont iconshare icon"></i>
+      <text>分享</text>
+    </button>
   </view>
 </view>
 <!-- 请求授权弹框 -->
@@ -17,7 +19,7 @@
 <!-- 评论弹框 -->
 <x-bottom-modal isModalHidden="{{isComModalHidden}}">
   <form slot="modal-content" report-submit="true" bind:submit="onSend">
-    <textarea name="content" class="comment-content" placeholder="写评论" value="{{comment}}" fixed="true"></textarea>
+    <textarea name="content" value="{{comment}}" class="comment-content" placeholder="写评论" fixed="true"></textarea>
     <button class="send-btn" size="mini" form-type="submit">发送</button>
   </form>
 </x-bottom-modal>

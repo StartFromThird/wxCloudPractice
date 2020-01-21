@@ -19,14 +19,6 @@ Component({
     isLoginModalHidden: true,
     isComModalHidden: true,
     comment: '',
-    blogId: ''
-  },
-  lifetimes: {
-    ready() {
-      this.setData({
-        'blogId': this.properties.blog._id
-      })
-    }
   },
   /**
    * 组件的方法列表
@@ -52,7 +44,7 @@ Component({
         data: {
           content,
           createTime: db.serverDate(),
-          blogId: this.data.blogId,
+          blogId: this.data.blog._id,
           nickName: userInfo.nickName,
           avatarUrl: userInfo.avatarUrl
         }
@@ -63,8 +55,9 @@ Component({
         })
         this.setData({
           isComModalHidden: true,
-          content: '',
+          comment: '',
         })
+        this.triggerEvent('refreshComList')
       })
     },
     loginfail() {
