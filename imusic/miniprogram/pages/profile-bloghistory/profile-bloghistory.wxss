@@ -1,0 +1,10 @@
+/* pages/profile-bloghistory/profile-bloghistory.wxss */
+.blog-panel {
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+}
+.blog-no-more-tip {
+  padding: 8rpx 0 20rpx 0;
+  text-align: center;
+  color: #939393;
+}

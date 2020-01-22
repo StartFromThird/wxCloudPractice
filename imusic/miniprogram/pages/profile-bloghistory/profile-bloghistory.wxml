@@ -1,0 +1,12 @@
+<view class="blog-list">
+  <block wx:for="{{blogList}}" wx:key="_id">
+    <view class="blog-panel">
+      <x-blog-card blog="{{item}}" data-blogid="{{item._id}}" bind:tap="goComment"/>
+      <x-blog-control blog="{{item}}" iconfont="iconfont" iconcomment="iconcomment" iconshare="iconshare"  />
+    </view>
+  </block>
+  <view class="blog-no-more-tip" hidden="{{isTipHidden}}">暂无更多数据</view>
+</view>
+<view>
+  <x-login isModalHidden="{{isModalHidden}}" bind:loginsuccess="loginsuccess" bind:loginfail="loginfail"></x-login>
+</view>

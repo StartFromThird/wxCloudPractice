@@ -34,6 +34,7 @@ const getAllCollectionList = async (collectionName, wo) => {
 // 云函数入口函数
 exports.main = async (event, context) => {
   const app = new TcbRouter({ event });
+  const wxContext = cloud.getWXContext()
   app.router('list', async (ctx, next) => {
     const k = event.keyword
     let kw = {}
@@ -73,6 +74,17 @@ exports.main = async (event, context) => {
       detail,
       commentList
     }
+  })
+  app.router('getListByOpenid', async (ctx, next) => {
+    ctx.body = await db.collection('blog').where({
+      _openid: wxContext.OPENID
+    }).skip(event.start)
+      .limit(event.count)
+      .orderBy('createTime', 'desc')
+      .get()
+      .then((res) => {
+        return res
+      })
   })
   return app.serve()
 }
