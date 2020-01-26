@@ -22,7 +22,7 @@ const updateAccessToken = async () => {
     await updateAccessToken()
   }
 }
-updateAccessToken()
+// updateAccessToken()
 // 本地取token, 如果过期了更新本地再取
 const getAccessToken = async () => {
   try {
