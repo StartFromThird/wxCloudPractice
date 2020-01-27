@@ -1,28 +1,58 @@
 const Router = require("koa-router");
 const router = new Router();
-const rp = require('request-promise')
-const getAccessToken = require("../utils/getAccessToken.js");
-const ENV = "test-a6c0fc";
+const callCloudFn = require("../utils/callCloudFn.js");
+const callCloudDB = require('../utils/callCloudDB.js')
 
 router.get("/list", async (ctx, next) => {
   const FUNCTION_NAME = 'music'
-  const ACCESS_TOKEN = await getAccessToken();
-  const url = `https://api.weixin.qq.com/tcb/invokecloudfunction?access_token=${ACCESS_TOKEN}&env=${ENV}&name=${FUNCTION_NAME}`;
   const query = ctx.request.query
-  var options = {
-    method: "POST",
-    uri: url,
-    body: {
-      $url: 'playlist',
-      start: parseInt(query.start),
-      count: parseInt(query.count)
-    },
-    json: true
+  const params =  {
+    $url: 'playlist',
+    start: parseInt(query.start),
+    count: parseInt(query.count)
   }
-  ctx.body = await rp(options)
+  ctx.body = await callCloudFn(ctx, FUNCTION_NAME, params)
     .then((res) => {
       return {
         data: JSON.parse(res.resp_data).data,
+        code: 20000
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+      return err
+    });
+});
+router.get("/del", async (ctx, next) => {
+  const DB_FN_NAME = 'databasedelete'
+  const query = ctx.request.query
+  const sql_query =  `db.collection('playlist').doc('${query.id}').remove()`
+  ctx.body = await callCloudDB(ctx, DB_FN_NAME, sql_query)
+    .then((res) => {
+      return {
+        data: res,
+        code: 20000
+      }
+    })
+    .catch((err) => {
+      return err
+    });
+});
+router.post("/update", async (ctx, next) => {
+  const DB_FN_NAME = 'databaseupdate'
+  const params = ctx.request.body
+  const sql_query =  `
+    db.collection('playlist').doc('${params._id}')
+      .update({
+        data: {
+          name: '${params.name}',
+          copywrite: '${params.copywriter}',
+        }
+      })`
+  ctx.body = await callCloudDB(ctx, DB_FN_NAME, sql_query)
+    .then((res) => {
+      return {
+        data: res,
         code: 20000
       }
     })
