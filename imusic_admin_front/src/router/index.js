@@ -33,7 +33,7 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/',
-    redirect: '/playlist/list'
+    redirect: '/playlist/index'
   },
   {
     path: '/login',
@@ -43,14 +43,27 @@ export const constantRoutes = [
   {
     path: '/playlist',
     component: Layout,
-    name: 'Example',
+    name: 'playlist',
     children: [
       {
-        path: 'list',
-        name: 'list',
+        path: 'index',
+        name: 'playlist',
         component: () => import('@/views/playlist/index'),
         meta: { title: '歌单管理', icon: 'table' }
-      },
+      }
+    ]
+  },
+  {
+    path: '/swiper',
+    component: Layout,
+    name: 'swiper',
+    children: [
+      {
+        path: 'index',
+        name: 'swiper',
+        component: () => import('@/views/swiper/index'),
+        meta: { title: '首页轮播管理', icon: 'table' }
+      }
     ]
   },
   {

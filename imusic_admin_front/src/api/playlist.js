@@ -16,8 +16,8 @@ export function del(params) {
 }
 export function update(params) {
   return request({
-      url: `${baseURL}/update`,
-      method: 'post',
-      data: params
+    url: `${baseURL}/update`,
+    method: 'post',
+    data: params
   })
 }
