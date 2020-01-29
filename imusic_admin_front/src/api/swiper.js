@@ -7,3 +7,11 @@ export function getList(params) {
     params
   })
 }
+
+export function del(params) {
+  return request({
+      params,
+      url: `${baseURL}/del`,
+      method: 'get',
+  })
+}

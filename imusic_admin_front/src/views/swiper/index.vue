@@ -32,7 +32,7 @@
       title="提示"
       :visible.sync="delDialogVisible"
       width="30%">
-      <span>确定要删除该条歌单吗？</span>
+      <span>确定要删除该条记录吗？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="delDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="deletePL">确 定</el-button>
@@ -99,26 +99,21 @@ export default {
       this.currentItem = r
     },
     deletePL() {
-      let p = {
-        'id': this.currentItem._id
-      }
-      swiperApi.del(p)
+      swiperApi.del(this.currentItem)
         .then(res => {
-          this.delDialogVisible = false
-          if (res.data && res.data.errcode === 0) {
+          if (res.data.delDB && res.data.delDB.errcode === 0 && res.data.delST && res.data.delST.errcode === 0) {
+            this.getList()
             this.$message({
-              message: '歌单删除成功',
+              message: '删除成功',
               type: 'success'
             })
-            this.swiper = []
-            this.currentItem = {}
-            this.getList()
           } else {
             this.$message({
               message: JSON.stringify(res.data),
               type: 'error'
             })
           }
+          this.delDialogVisible = false
         })
         .catch(err => {
           this.delDialogVisible = false

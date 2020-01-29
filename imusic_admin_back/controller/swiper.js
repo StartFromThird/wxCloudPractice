@@ -12,7 +12,7 @@ router.get("/list", async (ctx, next) => {
   let file_list = [];
   res.data.forEach(ele => {
     file_list.push({
-      fileid: JSON.parse(ele).fieldId,
+      fileid: JSON.parse(ele).file_id,
       max_age: 7200
     });
   });
@@ -21,7 +21,7 @@ router.get("/list", async (ctx, next) => {
   if (dlURL.errcode === 0 && dlURL.file_list.length > 0) {
     dlURL.file_list.forEach((ele, i) => {
       swiper_list.push({
-        fileid: ele.fileid,
+        file_id: ele.fileid,
         download_url: ele.download_url,
         _id: JSON.parse(res.data[i])._id
       });
@@ -32,4 +32,33 @@ router.get("/list", async (ctx, next) => {
     code: 20000
   };
 });
+
+router.get("/del", async (ctx, next) => {
+  const query = ctx.request.query
+  // 数据库 删除记录
+  const DB_FN_NAME = 'databasedelete'
+  const sql_query =  `db.collection('swiper').doc('${query._id}').remove()`
+  const delDB = await callCloudDB(ctx, DB_FN_NAME, sql_query)
+                  .then((res) => {
+                    return res
+                  })
+                  .catch((err) => {
+                    return err
+                  });
+  // 存储 删文件 
+  const delST = await cloudStorage.delete(ctx, [query.file_id])
+                  .then(res => {
+                    return res
+                  }).catch((err) => {
+                    return err
+                  });
+  ctx.body = {
+    code: 20000,
+    data: {
+      delDB,
+      delST
+    }
+  }
+
+})
 module.exports = router;
