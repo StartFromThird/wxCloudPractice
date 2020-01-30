@@ -61,4 +61,21 @@ router.get("/del", async (ctx, next) => {
   }
 
 })
+
+router.post("/upload", async(ctx, next) => {
+  // 上传文件
+  const fileid = await cloudStorage.upload(ctx);
+  // 存入数据库
+  const query = `
+    db.collection('swiper').add({
+        data: {
+            file_id: '${fileid}'
+        }
+    })`
+  const res = await callCloudDB(ctx, 'databaseadd', query)
+  ctx.body = {
+    code: 20000,
+    id_list: res.id_list
+  }
+})
 module.exports = router;

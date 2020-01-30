@@ -1,5 +1,11 @@
 <template>
   <div class="app-container">
+    <el-upload
+      :show-file-list="isshow"
+      action="http://localhost:3000/swiper/upload"
+      :on-success="uploadSuccess">
+      <el-button size="small" type="primary">点击上传</el-button>
+    </el-upload>
     <el-table
       v-loading="listLoading"
       :data="swiper"
@@ -71,6 +77,7 @@ export default {
       delDialogVisible: false,
       editDialogVisible: false,
       currentItem: {},
+      isshow: false
     };
   },
   computed: {
@@ -85,6 +92,15 @@ export default {
 
   },
   methods: {
+    uploadSuccess(res) {
+      if (res.id_list.length > 0) {
+        this.$message({
+          message: '上传成功',
+          type: 'success'
+        })
+        this.getList()
+      }
+    },
     getList() {
       this.listLoading = true
       swiperApi.getList().then(res => {

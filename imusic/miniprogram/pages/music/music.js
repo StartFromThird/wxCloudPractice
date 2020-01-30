@@ -7,17 +7,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-    swiperImage: [{
-        url: 'http://p1.music.126.net/oeH9rlBAj3UNkhOmfog8Hw==/109951164169407335.jpg',
+    swiperImage: [
+      {
+        file_id: 'http://p1.music.126.net/oeH9rlBAj3UNkhOmfog8Hw==/109951164169407335.jpg',
       },
       {
-        url: 'http://p1.music.126.net/xhWAaHI-SIYP8ZMzL9NOqg==/109951164167032995.jpg',
+        file_id: 'http://p1.music.126.net/xhWAaHI-SIYP8ZMzL9NOqg==/109951164167032995.jpg',
       },
       {
-        url: 'http://p1.music.126.net/Yo-FjrJTQ9clkDkuUCTtUg==/109951164169441928.jpg',
+        file_id: 'http://p1.music.126.net/Yo-FjrJTQ9clkDkuUCTtUg==/109951164169441928.jpg',
       }
     ],
     playlist: []
+  },
+  swiperImage() {
+    const db = wx.cloud.database()
+    db.collection('swiper').get()
+      .then((res) => {
+        if (res.data && res.data.length > 0) {
+          this.setData({
+            swiperImage: res.data
+          })
+        }
+      })
   },
   getPlaylist() {
     wx.showLoading({
@@ -45,6 +57,7 @@ Page({
    */
   onLoad: function(options) {
     this.getPlaylist()
+    this.swiperImage()
   },
 
   /**
@@ -82,6 +95,7 @@ Page({
       playlist: []
     })
     this.getPlaylist()
+    this.swiperImage()
   },
 
   /**
