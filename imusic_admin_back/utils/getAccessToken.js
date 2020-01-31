@@ -32,7 +32,6 @@ const getAccessToken = async () => {
     if ((nowTime - recordTime < 60 * 60 * 2 * 1000) && (nowTime - recordTime > 0)) {
       return recordObj.access_token
     } else {
-      console.log("查token")
       await updateAccessToken()
       await getAccessToken()  
     }
@@ -43,7 +42,7 @@ const getAccessToken = async () => {
   }
 }
 
-// setInterval(async () => {
-//   await updateAccessToken()
-// }, 7000 * 1000)
+setInterval(async () => {
+  await updateAccessToken()
+}, 7000 * 1000)
 module.exports = getAccessToken
