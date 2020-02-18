@@ -47,6 +47,7 @@
   align-items: center;
   justify-content: center;
   font-weight: normal;
+  z-index: 0;
 }
 .share-btn::after {
   display: none;

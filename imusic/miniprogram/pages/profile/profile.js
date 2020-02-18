@@ -14,12 +14,15 @@ Page({
     wx.cloud.callFunction({
       name: 'getQrCode'
     }).then((res) => {
-      console.log(res)
-      const fileId = res.result
-      wx.previewImage({
-        urls: [fileId],
-        current: fileId
-      })
+      if (res.result.fileID) {
+        const fileId = res.result.fileID
+        wx.previewImage({
+          urls: [fileId],
+          current: fileId
+        })
+      }else {
+        console.log(res)
+      }
       wx.hideLoading()
     })
   },

@@ -6,7 +6,7 @@
     <image class="player-disc-cover rotation {{isPlay ? '' : 'paused'}}" src="{{bgImgUrl}}"></image>
   </view>
 </view>
-<view class="player-progress">进度条{{index}}</view>
+<!-- <view class="player-progress">进度条{{index}}</view>-->
 <view class="player-control">
   <view class="iconfont iconPrevioustrack {{(index == 0) ? 'disableBtn' : ''}}" bind:tap="playPrevious"></view>
   <view class="iconfont {{isPlay ? 'iconstop' : 'iconplay'}}" bind:tap="togglePlay"></view>
