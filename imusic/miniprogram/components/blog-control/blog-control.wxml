@@ -17,9 +17,9 @@
   bind:loginfail="loginfail">
 </x-login>
 <!-- 评论弹框 -->
-<x-bottom-modal isModalHidden="{{isComModalHidden}}">
+<x-bottom-modal isModalHidden="{{isComModalHidden}}" footerBottom="{{footerBottom}}">
   <form slot="modal-content" report-submit="true" bind:submit="onSend">
-    <textarea name="content" value="{{comment}}" class="comment-content" placeholder="写评论" fixed="true"></textarea>
+    <textarea name="content" bindfocus="onFocus" bindblur="onBlur" value="{{comment}}" class="comment-content" placeholder="写评论" fixed="true"></textarea>
     <button class="send-btn" size="mini" form-type="submit">发送</button>
   </form>
 </x-bottom-modal>

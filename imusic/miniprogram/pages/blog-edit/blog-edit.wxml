@@ -21,6 +21,7 @@
       <i class="iconfont iconadd"></i>
     </view>
   </view>
+  <!-- <button class="blog-public-btn" bind:tap="setReminder">授权</button> -->
   <view class="blog-footer" style="bottom:{{footerBottom}}px">
     <button class="blog-public-btn" bind:tap="send">发布</button>
   </view>

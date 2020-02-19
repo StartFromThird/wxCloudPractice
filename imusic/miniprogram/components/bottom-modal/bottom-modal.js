@@ -4,7 +4,8 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    isModalHidden: Boolean
+    isModalHidden: Boolean,
+    footerBottom: Number
   },
   options: {
     styleIsolation: 'apply-shared',
